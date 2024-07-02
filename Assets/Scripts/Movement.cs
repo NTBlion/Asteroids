@@ -1,18 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Rigidbody2D _rigidbody;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _rotationSpeed;
+
+    private bool _thrusting;
+    private bool _rotating;
+    private Vector3 _direction;
+
+    private void Awake()
     {
-        
+        _direction = new Vector3(0, 0, 1);
+    }
+    
+    private void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.W))
+            _rigidbody.AddForce(transform.up * _speed, ForceMode2D.Impulse);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Input.GetKey(KeyCode.A))
+            transform.Rotate(_direction * (Time.deltaTime * _rotationSpeed)) ;
+        if (Input.GetKey(KeyCode.D))
+            transform.Rotate(-_direction * (Time.deltaTime * _rotationSpeed));
     }
 }
