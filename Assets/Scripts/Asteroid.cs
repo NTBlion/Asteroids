@@ -12,5 +12,9 @@ public class Asteroid : MonoBehaviour
     {
         _rigidbody.AddForce(new Vector2(Random.Range(_minForce,_maxForce), Random.Range(_minForce,_maxForce)), ForceMode2D.Impulse);
     }
-    
+
+    private void OnDisable()
+    {
+        
+    }
 }
