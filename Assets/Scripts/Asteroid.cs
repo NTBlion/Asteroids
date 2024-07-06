@@ -13,8 +13,9 @@ public class Asteroid : MonoBehaviour
         _rigidbody.AddForce(new Vector2(Random.Range(_minForce,_maxForce), Random.Range(_minForce,_maxForce)), ForceMode2D.Impulse);
     }
 
-    private void OnDisable()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        
+        // сделать выключение с пула
+        Destroy(gameObject);
     }
 }

@@ -27,8 +27,11 @@ public abstract class Pool : MonoBehaviour
         var obj = _objects.FirstOrDefault(p => p.activeSelf == false);
 
         if (obj == null)
+        {
             obj = Create();
-
+            _objects.Add(obj);
+        }
+        
         obj.gameObject.SetActive(true);
         return obj;
     }
