@@ -1,19 +1,16 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using Random = UnityEngine.Random;
 
-public class Asteroid : MonoBehaviour
+public class SmallAsteroid : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _minForce;
     [SerializeField] private float _maxForce;
 
-    public UnityEvent<Asteroid> Splitted = new UnityEvent<Asteroid>();
+    private Pool<SmallAsteroid> _pool;
 
-    private Pool<Asteroid> _pool;
-
-    public void Init(Pool<Asteroid> pool)
+    public void Init(Pool<SmallAsteroid> pool)
     {
         _pool = pool;
     }
@@ -26,7 +23,6 @@ public class Asteroid : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Splitted.Invoke(this);
         _pool.Disable(this);
     }
 }
