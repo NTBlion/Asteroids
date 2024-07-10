@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 public class AsteroidSpawner : MonoBehaviour
 {
-    [SerializeField] private BoxCollider2D _spawnZone;
+    [SerializeField] private Transform[] _spawnPoint;
     [SerializeField] private Asteroid _asteroid;
     [SerializeField] private int _poolCapacity;
     [SerializeField] private Transform _container;
@@ -28,12 +28,7 @@ public class AsteroidSpawner : MonoBehaviour
             var asteroid = _pool.EnableObject();
             asteroid.Init(_pool);
 
-            var bound = _spawnZone.bounds;
-            var positionX = Random.Range(bound.min.x, bound.max.x);
-            var positionY = Random.Range(bound.min.y, bound.max.y);
-
-            _spawnZone.transform.position = new Vector2(positionX, positionY);
-            asteroid.transform.position = _spawnZone.transform.position;
+            asteroid.transform.position = _spawnPoint[Random.Range(0, _spawnPoint.Length)].position;
         }
     }
 }
