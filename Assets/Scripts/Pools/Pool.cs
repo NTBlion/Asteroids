@@ -31,6 +31,8 @@ public class Pool<T> where T : MonoBehaviour
         if (obj == null)
         {
             obj = Create();
+            obj.gameObject.SetActive(true);
+            return obj;
         }
 
         obj.gameObject.SetActive(true);
@@ -54,6 +56,6 @@ public class Pool<T> where T : MonoBehaviour
     {
         var obj = GameObject.Instantiate(_prefab, _container);
         _objects.Add(obj);
-        return _prefab;
+        return obj;
     }
 }

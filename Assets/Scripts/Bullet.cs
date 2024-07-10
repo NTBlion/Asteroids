@@ -7,13 +7,11 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private Rigidbody2D _rigidbody;
-
-    private Transform _direction;
+    
     private Pool<Bullet> _pool;
 
-    public void Init(Pool<Bullet> pool, Transform direction)
+    public void Init(Pool<Bullet> pool)
     {
-        _direction = direction;
         _pool = pool;
     }
     

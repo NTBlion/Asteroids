@@ -7,7 +7,6 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] private Bullet _bullet;
     [SerializeField] private int _poolCapacity;
     [SerializeField] private Transform _container;
-    [SerializeField] private Player _player;
 
     private Pool<Bullet> _pool;
 
@@ -25,6 +24,7 @@ public class BulletSpawner : MonoBehaviour
     public void Spawn()
     {
         var bullet = _pool.EnableObject();
+        bullet.Init(_pool);
         bullet.transform.position = _shootPoint.position;
         bullet.transform.rotation = _shootPoint.transform.rotation;
     }
