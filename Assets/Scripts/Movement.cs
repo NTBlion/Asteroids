@@ -8,13 +8,8 @@ public class Movement : MonoBehaviour
 
     private bool _thrusting;
     private bool _rotating;
-    private Vector3 _direction;
-
-    private void Awake()
-    {
-        _direction = new Vector3(0, 0, 1);
-    }
     
+        
     private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.W))
@@ -24,8 +19,8 @@ public class Movement : MonoBehaviour
     private void Update()
     {
         if (Input.GetKey(KeyCode.A))
-            transform.Rotate(_direction * (Time.deltaTime * _rotationSpeed)) ;
+            transform.Rotate(transform.forward * (Time.deltaTime * _rotationSpeed)) ;
         if (Input.GetKey(KeyCode.D))
-            transform.Rotate(-_direction * (Time.deltaTime * _rotationSpeed));
+            transform.Rotate(-transform.forward * (Time.deltaTime * _rotationSpeed));
     }
 }

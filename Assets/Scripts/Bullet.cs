@@ -6,18 +6,24 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _speed;
+    [SerializeField] private Rigidbody2D _rigidbody;
 
-    private Vector2 _direction;
-    
-    private void Update()
+    private Transform _direction;
+    private Pool<Bullet> _pool;
+
+    public void Init(Pool<Bullet> pool, Transform direction)
     {
-        _direction = transform.up * (_speed * Time.deltaTime);
-        transform.Translate(_direction, Space.World);
+        _direction = direction;
+        _pool = pool;
+    }
+    
+    private void FixedUpdate()
+    {
+        _rigidbody.AddForce(transform.up * _speed, ForceMode2D.Impulse);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // сделать выключение с пула
-        Destroy(gameObject);
+        _pool.Disable(this);
     }
 }

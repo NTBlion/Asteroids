@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,6 +6,13 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _minForce;
     [SerializeField] private float _maxForce;
+
+    private Pool<Asteroid> _pool;
+
+    public void Init(Pool<Asteroid> pool)
+    {
+        _pool = pool;
+    }
     
     private void OnEnable()
     {
@@ -15,7 +21,6 @@ public class Asteroid : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // сделать выключение с пула
-        Destroy(gameObject);
+        _pool.Disable(this);
     }
 }
