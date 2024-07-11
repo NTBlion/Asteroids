@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthUI : MonoBehaviour
+public class HealthView : MonoBehaviour
 {
     [SerializeField] private Health _health;
     [SerializeField] private GameObject _prefab;

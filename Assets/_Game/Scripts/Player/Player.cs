@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     
     private Health _health;
+
+    public Action Destroyed;
 
     public void Init(Health health)
     {
@@ -22,6 +25,7 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         _health.HealthChanged -= OnHealthChanged;
+        Destroyed?.Invoke();
     }
     
     private void OnHealthChanged()
