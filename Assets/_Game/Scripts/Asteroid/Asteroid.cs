@@ -9,7 +9,7 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private float _minForce;
     [SerializeField] private float _maxForce;
 
-    public UnityEvent<Asteroid> Splitted = new UnityEvent<Asteroid>();
+    public Action<Asteroid> Splitted;
 
     private Pool<Asteroid> _pool;
 
@@ -26,7 +26,7 @@ public class Asteroid : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Splitted.Invoke(this);
+        Splitted?.Invoke(this);
         _pool.Disable(this);
     }
 }
