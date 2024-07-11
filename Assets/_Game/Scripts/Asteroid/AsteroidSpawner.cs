@@ -10,6 +10,7 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] private int _poolCapacity;
     [SerializeField] private Transform _container;
     [SerializeField] private int _splitCount;
+    [SerializeField] private Score _score;
     
     private Pool<Asteroid> _asteroidPool;
     private Pool<SmallAsteroid> _smallAsteroidPool;
@@ -22,10 +23,11 @@ public class AsteroidSpawner : MonoBehaviour
 
     public Transform Container => _container;
 
-    public void Init(Pool<Asteroid> asteroidPool, Pool<SmallAsteroid> smallAsteroidPool)
+    public void Init(Pool<Asteroid> asteroidPool, Pool<SmallAsteroid> smallAsteroidPool, Score score)
     {
         _asteroidPool = asteroidPool;
         _smallAsteroidPool = smallAsteroidPool;
+        _score = score;
     }
     
     public IEnumerator StartSpawn()
@@ -42,7 +44,7 @@ public class AsteroidSpawner : MonoBehaviour
         for (int i = 0; i < spawnCount; i++)
         {
             var asteroid = _asteroidPool.EnableObject();
-            asteroid.Init(_asteroidPool);
+            asteroid.Init(_asteroidPool, _score);
             asteroid.Splitted += Split;
 
             asteroid.transform.position = _spawnPoint[Random.Range(0, _spawnPoint.Length)].position;
@@ -54,7 +56,7 @@ public class AsteroidSpawner : MonoBehaviour
         for (int i = 0; i < _splitCount; i++)
         {
             var smallAsteroid = _smallAsteroidPool.EnableObject();
-            smallAsteroid.Init(_smallAsteroidPool);
+            smallAsteroid.Init(_smallAsteroidPool, _score);
 
             smallAsteroid.transform.position = asteroid.transform.position;
             asteroid.Splitted -= Split;

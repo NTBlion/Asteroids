@@ -1,16 +1,20 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SmallAsteroid : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _minForce;
     [SerializeField] private float _maxForce;
+    [SerializeField] private Score _score;
 
     private Pool<SmallAsteroid> _pool;
 
-    public void Init(Pool<SmallAsteroid> pool)
+    public void Init(Pool<SmallAsteroid> pool, Score score)
     {
         _pool = pool;
+        _score = score;
     }
 
     private void OnEnable()
@@ -25,7 +29,8 @@ public class SmallAsteroid : MonoBehaviour
         {
             health.TakeDamage();
         }
-
+        
+        _score.AddScore();
         _pool.Disable(this);
     }
 }

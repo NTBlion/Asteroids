@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class GameFlow : MonoBehaviour
@@ -8,6 +7,7 @@ public class GameFlow : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private Laser _laser;
     [SerializeField] private Movement _movement;
+    [SerializeField] private Score _score;
     [SerializeField] private AsteroidSpawner _asteroidSpawner;
     [SerializeField] private BulletSpawner _bulletSpawner;
 
@@ -27,7 +27,7 @@ public class GameFlow : MonoBehaviour
             _asteroidSpawner.Container);
         _bulletPool = new Pool<Bullet>(_bulletSpawner.Bullet, _bulletSpawner.PoolCapacity, _bulletSpawner.Container);
         
-        _asteroidSpawner.Init(_asteroidPool, _smallAsteroidPool);
+        _asteroidSpawner.Init(_asteroidPool, _smallAsteroidPool, _score);
         _bulletSpawner.Init(_bulletPool);
         _player.Init(_health);
         
@@ -38,12 +38,12 @@ public class GameFlow : MonoBehaviour
     {
         _health.Died += OnDied;
     }
-
+    
     private void OnDisable()
     {
         _health.Died -= OnDied;
     }
-
+    
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && _shooting)

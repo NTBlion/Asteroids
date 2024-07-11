@@ -7,14 +7,16 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _minForce;
     [SerializeField] private float _maxForce;
+    [SerializeField] private Score _score;
 
     public Action<Asteroid> Splitted;
 
     private Pool<Asteroid> _pool;
 
-    public void Init(Pool<Asteroid> pool)
+    public void Init(Pool<Asteroid> pool, Score score)
     {
         _pool = pool;
+        _score = score;
     }
 
     private void OnEnable()
@@ -30,6 +32,7 @@ public class Asteroid : MonoBehaviour
             health.TakeDamage();
         }
 
+        _score.AddScore();
         Splitted?.Invoke(this);
         _pool.Disable(this);
     }
