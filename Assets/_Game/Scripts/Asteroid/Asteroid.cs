@@ -7,6 +7,7 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _minForce;
     [SerializeField] private float _maxForce;
+    [SerializeField] private int _damage = 1;
 
     public Action<Asteroid> Splitted;
 
@@ -25,6 +26,11 @@ public class Asteroid : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if (other.collider.TryGetComponent(out Health health))
+        {
+            health.TakeDamage(_damage);
+        }
+
         Splitted?.Invoke(this);
         _pool.Disable(this);
     }

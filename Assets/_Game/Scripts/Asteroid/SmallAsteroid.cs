@@ -5,6 +5,7 @@ public class SmallAsteroid : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _minForce;
     [SerializeField] private float _maxForce;
+    [SerializeField] private int _damage = 1;
 
     private Pool<SmallAsteroid> _pool;
 
@@ -21,6 +22,11 @@ public class SmallAsteroid : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if (other.collider.TryGetComponent(out Health health))
+        {
+            health.TakeDamage(_damage);
+        }
+
         _pool.Disable(this);
     }
 }
