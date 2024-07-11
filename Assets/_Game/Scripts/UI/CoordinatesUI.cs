@@ -5,7 +5,8 @@ using UnityEngine;
 public class CoordinatesUI : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private TMP_Text _text;
+    [SerializeField] private Rigidbody2D _rigidbody;
+    [SerializeField] private TMP_Text _coordinatesText;
 
     private void OnEnable()
     {
@@ -24,7 +25,9 @@ public class CoordinatesUI : MonoBehaviour
 
     private void Update()
     {
+        float rotationZ = _player.transform.rotation.z;
         Vector3 position = _player.transform.position;
-        _text.text = $"X: {position.x:F2} Y: {position.y:F2}";
+        float speed = _rigidbody.velocity.magnitude;
+        _coordinatesText.text = $"X: {position.x:F2} Y: {position.y:F2} Rotation: {rotationZ:F2}\u00b0 Speed: {speed:F2} units/sec";
     }
 }

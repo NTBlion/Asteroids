@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Laser : MonoBehaviour
@@ -12,33 +12,43 @@ public class Laser : MonoBehaviour
 
     public Action Enabled;
     public Action Disabled;
+    public Action<int> ShootCountChanged;
 
     private int _shootCount;
-    private float _time = 0;
+    private float _currentTime;
     private bool _isActive;
+
+    public bool IsActive => _isActive;
+
+    public float TimeBeforeAddShootCount => _timeBeforeAddShootCount;
 
     private void Awake()
     {
         _shootCount = _maxShootCount;
+        ShootCountChanged?.Invoke(_shootCount);
         _collider.enabled = false;
+        _currentTime = TimeBeforeAddShootCount;
     }
 
     private void Update()
     {
-        _time += Time.deltaTime;
-
-        if (_time > _timeBeforeAddShootCount)
+        if (_shootCount >= _maxShootCount)
         {
-            _shootCount++;
+            _shootCount = _maxShootCount;
+            ShootCountChanged?.Invoke(_shootCount);
+        }
+        else
+        {
+            _timeBeforeAddShootCount -= Time.deltaTime;
 
-            if (_shootCount >= _maxShootCount)
-                _shootCount = _maxShootCount;
-
-            _time = 0;
+            if (_timeBeforeAddShootCount <= 0)
+            {
+                _shootCount++;
+                ShootCountChanged?.Invoke(_shootCount);
+                _timeBeforeAddShootCount = _currentTime;
+            }
         }
     }
-
-    public bool IsActive => _isActive;
 
     public IEnumerator ActivateLaser()
     {
@@ -46,6 +56,7 @@ public class Laser : MonoBehaviour
         {
             Enabled?.Invoke();
             _shootCount--;
+            ShootCountChanged?.Invoke(_shootCount);
             _collider.enabled = true;
             _isActive = true;
             yield return new WaitForSeconds(_lifeTime);
