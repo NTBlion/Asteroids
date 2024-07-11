@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,23 +10,34 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] private int _poolCapacity;
     [SerializeField] private Transform _container;
     [SerializeField] private int _splitCount;
-
+    
     private Pool<Asteroid> _asteroidPool;
     private Pool<SmallAsteroid> _smallAsteroidPool;
 
-    private void Awake()
+    public SmallAsteroid SmallAsteroid => _smallAsteroid;
+
+    public Asteroid Asteroid => _asteroid;
+
+    public int PoolCapacity => _poolCapacity;
+
+    public Transform Container => _container;
+
+    public void Init(Pool<Asteroid> asteroidPool, Pool<SmallAsteroid> smallAsteroidPool)
     {
-        _asteroidPool = new Pool<Asteroid>(_asteroid, _poolCapacity, _container);
-        _smallAsteroidPool = new Pool<SmallAsteroid>(_smallAsteroid, _poolCapacity, _container);
+        _asteroidPool = asteroidPool;
+        _smallAsteroidPool = smallAsteroidPool;
+    }
+    
+    public IEnumerator StartSpawn()
+    {
+        while (true)
+        {
+            Spawn(Random.Range(1, 11));
+            yield return new WaitUntil(IsAsteroidsActive);
+        }
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
-            Spawn(10);
-    }
-
-    public void Spawn(int spawnCount)
+    private void Spawn(int spawnCount)
     {
         for (int i = 0; i < spawnCount; i++)
         {
@@ -47,5 +59,16 @@ public class AsteroidSpawner : MonoBehaviour
             smallAsteroid.transform.position = asteroid.transform.position;
             asteroid.Splitted -= Split;
         }
+    }
+
+    private bool IsAsteroidsActive()
+    {
+        foreach (var asteroid in _asteroidPool.Objects)
+        {
+            if (asteroid.isActiveAndEnabled)
+                return false;
+        }
+
+        return true;
     }
 }

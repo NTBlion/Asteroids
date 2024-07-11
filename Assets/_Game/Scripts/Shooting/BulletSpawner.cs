@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
@@ -10,17 +9,17 @@ public class BulletSpawner : MonoBehaviour
 
     private Pool<Bullet> _pool;
 
-    private void Awake()
-    {
-        _pool = new Pool<Bullet>(_bullet, _poolCapacity, _container);
-    }
+    public int PoolCapacity => _poolCapacity;
 
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-            Spawn();
-    }
+    public Transform Container => _container;
 
+    public Bullet Bullet => _bullet;
+
+    public void Init(Pool<Bullet> pool)
+    {
+        _pool = pool;
+    }
+    
     public void Spawn()
     {
         var bullet = _pool.EnableObject();

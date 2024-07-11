@@ -7,10 +7,9 @@ public class Pool<T> where T : MonoBehaviour
     private T _prefab;
     private int _capacity;
     private Transform _container;
+    private readonly List<T> _objects;
 
-    private List<T> _objects;
-
-    public Pool (T prefab, int capacity, Transform container)
+    public Pool(T prefab, int capacity, Transform container)
     {
         _prefab = prefab;
         _capacity = capacity;
@@ -20,13 +19,15 @@ public class Pool<T> where T : MonoBehaviour
         {
             var obj = GameObject.Instantiate(prefab, container);
             obj.gameObject.SetActive(false);
-            _objects.Add(obj);
+            Objects.Add(obj);
         }
     }
 
+    public List<T> Objects => _objects;
+
     public T EnableObject()
     {
-        var obj = _objects.FirstOrDefault(p => p.isActiveAndEnabled == false);
+        var obj = Objects.FirstOrDefault(p => p.isActiveAndEnabled == false);
 
         if (obj == null)
         {
@@ -46,7 +47,7 @@ public class Pool<T> where T : MonoBehaviour
 
     public void ResetPool()
     {
-        foreach (var obj in _objects)
+        foreach (var obj in Objects)
         {
             obj.gameObject.SetActive(false);
         }
@@ -55,7 +56,7 @@ public class Pool<T> where T : MonoBehaviour
     private T Create()
     {
         var obj = GameObject.Instantiate(_prefab, _container);
-        _objects.Add(obj);
+        Objects.Add(obj);
         return obj;
     }
 }

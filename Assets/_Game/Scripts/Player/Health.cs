@@ -3,27 +3,27 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    private const int Damage = 1;
+    
     [SerializeField] private int _maxHealth;
     private int _currentHealth;
 
-    public Action<int> HealthChanged;
-    
+    public Action HealthChanged;
+    public Action Died;
+
+    public int MaxHealth => _maxHealth;
+
     private void Awake()
     {
-        _currentHealth = _maxHealth;
+        _currentHealth = MaxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage()
     {
-        _currentHealth -= damage;
-        HealthChanged?.Invoke(_currentHealth);
+        _currentHealth -= Damage;
+        HealthChanged?.Invoke();
         
         if (_currentHealth <= 0)
-            Die();
-    }
-
-    private void Die()
-    {
-        Debug.Log("Died");
+            Died?.Invoke();
     }
 }
