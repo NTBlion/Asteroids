@@ -6,7 +6,7 @@ public class GameFlow : MonoBehaviour
     [SerializeField] private Health _health;
     [SerializeField] private LoseScreenUI _loseScreen;
     [SerializeField] private Player _player;
-    [SerializeField] private BulletSpawner _bullet;
+    [SerializeField] private Laser _laser;
     [SerializeField] private Movement _movement;
     [SerializeField] private AsteroidSpawner _asteroidSpawner;
     [SerializeField] private BulletSpawner _bulletSpawner;
@@ -47,10 +47,13 @@ public class GameFlow : MonoBehaviour
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && _shooting)
-            _bullet.Spawn();
+            _bulletSpawner.Spawn();
 
         if (_rotating)
             _movement.Rotate();
+        
+        if(Input.GetMouseButtonDown(1) && _laser.IsActive == false)
+            StartCoroutine(_laser.ActivateLaser());
     }
 
     private void FixedUpdate()
