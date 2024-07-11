@@ -2,14 +2,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    private const string Horizontal = "Horizontal";
+
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
 
-    private bool _thrusting;
-    private bool _rotating;
-    
-        
     private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.W))
@@ -18,9 +16,8 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.A))
-            transform.Rotate(transform.forward * (Time.deltaTime * _rotationSpeed)) ;
-        if (Input.GetKey(KeyCode.D))
-            transform.Rotate(-transform.forward * (Time.deltaTime * _rotationSpeed));
+        Vector3 direction = new Vector3(0, 0, Input.GetAxis(Horizontal));
+
+        transform.Rotate(-direction * (Time.deltaTime * _rotationSpeed));
     }
 }
