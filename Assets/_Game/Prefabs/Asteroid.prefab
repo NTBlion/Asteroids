@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1858094590563869237}
   - component: {fileID: 1269023546391044291}
+  - component: {fileID: 4216132054142434460}
   m_Layer: 0
   m_Name: VIew
   m_TagString: Untagged
@@ -84,6 +85,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4216132054142434460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2862439390284924196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a883102ad09ff4a99399a04cd283da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 1269023546391044291}
+  _sprites:
+  - {fileID: 21300000, guid: 84dd51b803e68774cbc99de42401129a, type: 3}
+  - {fileID: 21300000, guid: 66e1c24309b333f4abd8fdb432ec9489, type: 3}
+  - {fileID: 21300000, guid: 8bc5460051406154ebfa6c80c01a3c7f, type: 3}
+  - {fileID: 21300000, guid: c29606f74119bd2478b820d8d38c0f3e, type: 3}
 --- !u!1 &5917541308446843087
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,4 +238,4 @@ MonoBehaviour:
   _rigidbody: {fileID: 759942306537519302}
   _minForce: -2
   _maxForce: 2
-  _splitCount: 2
+  _score: {fileID: 0}
