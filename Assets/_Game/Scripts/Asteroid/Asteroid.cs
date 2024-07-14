@@ -28,9 +28,7 @@ public class Asteroid : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.collider.TryGetComponent(out Health health))
-        {
             health.TakeDamage();
-        }
 
         _score.AddScore();
         Splitted?.Invoke(this);

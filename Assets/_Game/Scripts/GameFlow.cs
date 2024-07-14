@@ -10,6 +10,7 @@ public class GameFlow : MonoBehaviour
     [SerializeField] private Score _score;
     [SerializeField] private AsteroidSpawner _asteroidSpawner;
     [SerializeField] private BulletSpawner _bulletSpawner;
+    [SerializeField] private UFOSpawner _ufoSpawner;
 
     private Pool<Asteroid> _asteroidPool;
     private Pool<SmallAsteroid> _smallAsteroidPool;
@@ -29,9 +30,11 @@ public class GameFlow : MonoBehaviour
         
         _asteroidSpawner.Init(_asteroidPool, _smallAsteroidPool, _score);
         _bulletSpawner.Init(_bulletPool);
+        _ufoSpawner.Init(_player);
         _player.Init(_health);
         
         StartCoroutine(_asteroidSpawner.StartSpawn());
+        StartCoroutine(_ufoSpawner.StartSpawn());
     }
 
     private void OnEnable()
