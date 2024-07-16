@@ -11,14 +11,14 @@ namespace _Game.Scripts.Shooting
         [SerializeField] private float _timeBeforeAddShootCount;
         [SerializeField] private BoxCollider2D _collider;
 
-        public Action Enabled;
-        public Action Disabled;
-        public Action<int> ShootCountChanged;
-
         private int _shootCount;
         private float _currentTime;
         private bool _isActive;
-
+        
+        public event Action Enabled;
+        public event Action Disabled;
+        public event Action<int> ShootCountChanged;
+        
         public bool IsActive => _isActive;
 
         public float TimeBeforeAddShootCount => _timeBeforeAddShootCount;

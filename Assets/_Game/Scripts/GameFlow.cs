@@ -1,6 +1,7 @@
-using _Game.Scripts.Asteroid;
-using _Game.Scripts.Player;
+using _Game.Scripts.Asteroids;
+using _Game.Scripts.Character;
 using _Game.Scripts.Pool;
+using _Game.Scripts.Scores;
 using _Game.Scripts.Shooting;
 using _Game.Scripts.UFO;
 using _Game.Scripts.UI;
@@ -12,15 +13,15 @@ namespace _Game.Scripts
     {
         [SerializeField] private Health _health;
         [SerializeField] private LoseScreenUI _loseScreen;
-        [SerializeField] private Player.Player _player;
+        [SerializeField] private Player _player;
         [SerializeField] private Laser _laser;
         [SerializeField] private Movement _movement;
-        [SerializeField] private Score.Score _score;
+        [SerializeField] private Score _score;
         [SerializeField] private AsteroidSpawner _asteroidSpawner;
         [SerializeField] private BulletSpawner _bulletSpawner;
-        [SerializeField] private UFOSpawner _ufoSpawner;
+        [SerializeField] private UfoSpawner _ufoSpawner;
 
-        private Pool<Asteroid.Asteroid> _asteroidPool;
+        private Pool<Asteroid> _asteroidPool;
         private Pool<SmallAsteroid> _smallAsteroidPool;
         private Pool<Bullet> _bulletPool;
 
@@ -30,7 +31,7 @@ namespace _Game.Scripts
 
         private void Awake()
         {
-            _asteroidPool = new Pool<Asteroid.Asteroid>(_asteroidSpawner.Asteroid, _asteroidSpawner.PoolCapacity,
+            _asteroidPool = new Pool<Asteroid>(_asteroidSpawner.Asteroid, _asteroidSpawner.PoolCapacity,
                 _asteroidSpawner.Container);
             _smallAsteroidPool = new Pool<SmallAsteroid>(_asteroidSpawner.SmallAsteroid, _asteroidSpawner.PoolCapacity,
                 _asteroidSpawner.Container);

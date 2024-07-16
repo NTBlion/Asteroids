@@ -1,3 +1,4 @@
+using _Game.Scripts.Scores;
 using TMPro;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ namespace _Game.Scripts.UI
 {
     public class ScoreUI : MonoBehaviour
     {
-        [SerializeField] private Score.Score _score;
+        [SerializeField] private Score _score;
         [SerializeField] private TMP_Text _text;
 
         public TMP_Text Text => _text;

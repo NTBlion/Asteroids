@@ -1,3 +1,4 @@
+using _Game.Scripts.Character;
 using TMPro;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ namespace _Game.Scripts.UI
 {
     public class CoordinatesUI : MonoBehaviour
     {
-        [SerializeField] private Player.Player _player;
+        [SerializeField] private Player _player;
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private TMP_Text _coordinatesText;
 

@@ -1,15 +1,15 @@
-using _Game.Scripts.Player;
+using _Game.Scripts.Character;
 using UnityEngine;
 
 namespace _Game.Scripts.UFO
 {
-    public class UFO : MonoBehaviour
+    public class Ufo : MonoBehaviour
     {
         [SerializeField] private float _speed;
 
-        private Player.Player _player;
+        private Player _player;
 
-        public void Init(Player.Player player)
+        public void Init(Player player)
         {
             _player = player;
             _player.Destroyed += OnDestroyed;

@@ -1,20 +1,21 @@
 using System.Collections;
+using _Game.Scripts.Character;
 using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace _Game.Scripts.UFO
 {
-    public class UFOSpawner : MonoBehaviour
+    public class UfoSpawner : MonoBehaviour
     {
-        [SerializeField] private UFO _ufo;
+        [SerializeField] private Ufo _ufo;
         [SerializeField] private float _timeBeforeSpawn;
         [SerializeField] private Transform[] _spawnPoints;
         [SerializeField] private Transform _container;
+        
+        private Player _player;
 
-        private Player.Player _player;
-
-        public void Init(Player.Player player)
+        public void Init(Player player)
         {
             _player = player;
         }
