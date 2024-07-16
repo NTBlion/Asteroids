@@ -904,11 +904,11 @@ MonoBehaviour:
   - {fileID: 1625158199}
   - {fileID: 890483823}
   _asteroid: {fileID: 8028760080881514762, guid: cb66c8968dff5f64080014c0a16ab26f, type: 3}
-  _smallAsteroid: {fileID: 7375584830878317071, guid: 2059b3ecef9481943b6ca94c61d9ed9d, type: 3}
+  _asteroidSizeAfterSplit: {x: 0.5, y: 0.5, z: 0.5}
   _poolCapacity: 15
   _container: {fileID: 731328964}
   _splitCount: 2
-  _score: {fileID: 0}
+  _minMaxSpawnCount: {x: 1, y: 11}
 --- !u!4 &501813384
 Transform:
   m_ObjectHideFlags: 0

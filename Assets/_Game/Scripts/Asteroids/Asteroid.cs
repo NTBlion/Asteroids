@@ -12,11 +12,10 @@ namespace _Game.Scripts.Asteroids
         [SerializeField] private float _minForce;
         [SerializeField] private float _maxForce;
 
-        private bool _canSplit = true;
-
         private Pool<Asteroid> _pool;
 
         public event Action<Asteroid> Splitted;
+        public event Action<Asteroid> Destroyed;
 
         public void Init(Pool<Asteroid> pool)
         {
@@ -30,23 +29,14 @@ namespace _Game.Scripts.Asteroids
             _rigidbody.AddForce(new Vector2(Random.Range(_minForce, _maxForce), Random.Range(_minForce, _maxForce)),
                 ForceMode2D.Impulse);
         }
-
-        private void OnDisable()
-        {
-            _canSplit = true;
-        }
-
+        
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.collider.TryGetComponent(out Health health))
                 health.TakeDamage();
-
-            if (_canSplit)
-            {
-                Splitted?.Invoke(this);
-                _canSplit = false;
-            }
-
+            
+            Splitted?.Invoke(this);
+            Destroyed?.Invoke(this);
             _pool.Disable(this);
         }
     }
