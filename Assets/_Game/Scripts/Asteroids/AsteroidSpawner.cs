@@ -9,25 +9,25 @@ namespace _Game.Scripts.Asteroids
     public class AsteroidSpawner : MonoBehaviour
     {
         [SerializeField] private Transform[] _spawnPoint;
-        [SerializeField] private Asteroids.Asteroid _asteroid;
+        [SerializeField] private Asteroid _asteroid;
         [SerializeField] private SmallAsteroid _smallAsteroid;
         [SerializeField] private int _poolCapacity;
         [SerializeField] private Transform _container;
         [SerializeField] private int _splitCount;
         [SerializeField] private Score _score;
     
-        private Pool<Asteroids.Asteroid> _asteroidPool;
+        private Pool<Asteroid> _asteroidPool;
         private Pool<SmallAsteroid> _smallAsteroidPool;
 
         public SmallAsteroid SmallAsteroid => _smallAsteroid;
 
-        public Asteroids.Asteroid Asteroid => _asteroid;
+        public Asteroid Asteroid => _asteroid;
 
         public int PoolCapacity => _poolCapacity;
 
         public Transform Container => _container;
 
-        public void Init(Pool<Asteroids.Asteroid> asteroidPool, Pool<SmallAsteroid> smallAsteroidPool, Score score)
+        public void Init(Pool<Asteroid> asteroidPool, Pool<SmallAsteroid> smallAsteroidPool, Score score)
         {
             _asteroidPool = asteroidPool;
             _smallAsteroidPool = smallAsteroidPool;
@@ -55,7 +55,7 @@ namespace _Game.Scripts.Asteroids
             }
         }
 
-        private void Split(Asteroids.Asteroid asteroid)
+        private void Split(Asteroid asteroid)
         {
             for (int i = 0; i < _splitCount; i++)
             {

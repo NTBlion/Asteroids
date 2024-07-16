@@ -24,6 +24,7 @@ namespace _Game.Scripts
         private Pool<Asteroid> _asteroidPool;
         private Pool<SmallAsteroid> _smallAsteroidPool;
         private Pool<Bullet> _bulletPool;
+        private Pool<Ufo> _ufoPool;
 
         private bool _thrusting = true;
         private bool _rotating = true;
@@ -36,10 +37,11 @@ namespace _Game.Scripts
             _smallAsteroidPool = new Pool<SmallAsteroid>(_asteroidSpawner.SmallAsteroid, _asteroidSpawner.PoolCapacity,
                 _asteroidSpawner.Container);
             _bulletPool = new Pool<Bullet>(_bulletSpawner.Bullet, _bulletSpawner.PoolCapacity, _bulletSpawner.Container);
+            _ufoPool = new Pool<Ufo>(_ufoSpawner.Ufo, _ufoSpawner.PoolCapacity, _ufoSpawner.Container);
         
             _asteroidSpawner.Init(_asteroidPool, _smallAsteroidPool, _score);
             _bulletSpawner.Init(_bulletPool);
-            _ufoSpawner.Init(_player);
+            _ufoSpawner.Init(_player, _ufoPool);
             _player.Init(_health);
         
             StartCoroutine(_asteroidSpawner.StartSpawn());
@@ -81,6 +83,7 @@ namespace _Game.Scripts
             _asteroidPool.ResetPool();
             _smallAsteroidPool.ResetPool();
             _bulletPool.ResetPool();
+            _ufoPool.ResetPool();
             _thrusting = false;
             _rotating = false;
             _shooting = false;

@@ -1968,7 +1968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc043647a129c3d47bc7a154de70eca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreView: {fileID: 1478408753}
+  scoreUI: {fileID: 1478408753}
   _text: {fileID: 394863161}
 --- !u!1 &1364275589
 GameObject:
@@ -3110,7 +3110,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ufo: {fileID: 3989138950277738291, guid: 8829977a1bea44c4a99e7e6235832d3c, type: 3}
-  _timeBeforeSpawn: 5
+  _poolCapacity: 5
+  _container: {fileID: 731328964}
+  _timeBeforeSpawn: 20
   _spawnPoints:
   - {fileID: 914583976}
   - {fileID: 1551504973}
@@ -3130,7 +3132,6 @@ MonoBehaviour:
   - {fileID: 190615409}
   - {fileID: 1625158199}
   - {fileID: 890483823}
-  _container: {fileID: 731328964}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
