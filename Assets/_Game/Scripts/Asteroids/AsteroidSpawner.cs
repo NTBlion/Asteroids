@@ -10,35 +10,32 @@ namespace _Game.Scripts.Asteroids
     {
         [SerializeField] private Transform[] _spawnPoint;
         [SerializeField] private Asteroid _asteroid;
-        [SerializeField] private SmallAsteroid _smallAsteroid;
+        [SerializeField] private Vector3 _asteroidSizeAfterSplit;
         [SerializeField] private int _poolCapacity;
         [SerializeField] private Transform _container;
         [SerializeField] private int _splitCount;
-        [SerializeField] private Score _score;
-    
+        [SerializeField] private Vector2Int _minMaxSpawnCount;
+
         private Pool<Asteroid> _asteroidPool;
-        private Pool<SmallAsteroid> _smallAsteroidPool;
-
-        public SmallAsteroid SmallAsteroid => _smallAsteroid;
-
+        private Score _score;
+        
         public Asteroid Asteroid => _asteroid;
 
         public int PoolCapacity => _poolCapacity;
 
         public Transform Container => _container;
 
-        public void Init(Pool<Asteroid> asteroidPool, Pool<SmallAsteroid> smallAsteroidPool, Score score)
+        public void Init(Pool<Asteroid> asteroidPool, Score score)
         {
             _asteroidPool = asteroidPool;
-            _smallAsteroidPool = smallAsteroidPool;
             _score = score;
         }
-    
+        
         public IEnumerator StartSpawn()
         {
             while (true)
             {
-                Spawn(Random.Range(1, 11));
+                Spawn(Random.Range(_minMaxSpawnCount.x, _minMaxSpawnCount.y));
                 yield return new WaitUntil(IsAsteroidsActive);
             }
         }
@@ -48,7 +45,7 @@ namespace _Game.Scripts.Asteroids
             for (int i = 0; i < spawnCount; i++)
             {
                 var asteroid = _asteroidPool.EnableObject();
-                asteroid.Init(_asteroidPool, _score);
+                asteroid.Init(_asteroidPool);
                 asteroid.Splitted += Split;
 
                 asteroid.transform.position = _spawnPoint[Random.Range(0, _spawnPoint.Length)].position;
@@ -59,12 +56,15 @@ namespace _Game.Scripts.Asteroids
         {
             for (int i = 0; i < _splitCount; i++)
             {
-                var smallAsteroid = _smallAsteroidPool.EnableObject();
-                smallAsteroid.Init(_smallAsteroidPool, _score);
+                var smallAsteroid = _asteroidPool.EnableObject();
+                smallAsteroid.Init(_asteroidPool);
 
                 smallAsteroid.transform.position = asteroid.transform.position;
+                smallAsteroid.transform.localScale = _asteroidSizeAfterSplit;
                 asteroid.Splitted -= Split;
             }
+            
+            _score.AddScore();
         }
 
         private bool IsAsteroidsActive()

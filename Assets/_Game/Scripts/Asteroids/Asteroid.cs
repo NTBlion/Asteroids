@@ -1,7 +1,6 @@
 using System;
 using _Game.Scripts.Character;
 using _Game.Scripts.Pool;
-using _Game.Scripts.Scores;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,22 +11,29 @@ namespace _Game.Scripts.Asteroids
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private float _minForce;
         [SerializeField] private float _maxForce;
-        [SerializeField] private Score _score;
-        
+
+        private bool _canSplit = true;
+
         private Pool<Asteroid> _pool;
 
         public event Action<Asteroid> Splitted;
-        
-        public void Init(Pool<Asteroid> pool, Score score)
+
+        public void Init(Pool<Asteroid> pool)
         {
             _pool = pool;
-            _score = score;
         }
 
         private void OnEnable()
         {
+            transform.localScale = Vector3.one;
+
             _rigidbody.AddForce(new Vector2(Random.Range(_minForce, _maxForce), Random.Range(_minForce, _maxForce)),
                 ForceMode2D.Impulse);
+        }
+
+        private void OnDisable()
+        {
+            _canSplit = true;
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -35,8 +41,12 @@ namespace _Game.Scripts.Asteroids
             if (other.collider.TryGetComponent(out Health health))
                 health.TakeDamage();
 
-            _score.AddScore();
-            Splitted?.Invoke(this);
+            if (_canSplit)
+            {
+                Splitted?.Invoke(this);
+                _canSplit = false;
+            }
+
             _pool.Disable(this);
         }
     }
