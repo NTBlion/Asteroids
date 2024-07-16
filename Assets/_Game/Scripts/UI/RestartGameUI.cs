@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RestartGame : MonoBehaviour
+namespace _Game.Scripts.UI
 {
-    public void ReloadScene()
+    public class RestartGame : MonoBehaviour
     {
-        SceneManager.LoadScene(0);
+        public void ReloadScene()
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }

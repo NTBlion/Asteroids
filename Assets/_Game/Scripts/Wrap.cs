@@ -1,40 +1,43 @@
 using UnityEngine;
 
-public class Wrap : MonoBehaviour
+namespace _Game.Scripts
 {
-    private Camera _camera;
-
-    private void Awake()
+    public class Wrap : MonoBehaviour
     {
-        _camera = Camera.main;
-    }
+        private Camera _camera;
 
-    private void Update()
-    {
-        Vector3 viewportPosition = _camera.WorldToViewportPoint(transform.position);
-
-        Vector3 moveAdjustment = Vector3.zero;
-
-        switch (viewportPosition.x)
+        private void Awake()
         {
-            case < 0:
-                moveAdjustment.x += 1;
-                break;
-            case > 1:
-                moveAdjustment.x -= 1;
-                break;
+            _camera = Camera.main;
         }
 
-        switch (viewportPosition.y)
+        private void Update()
         {
-            case < 0:
-                moveAdjustment.y += 1;
-                break;
-            case > 1:
-                moveAdjustment.y -= 1;
-                break;
-        }
+            Vector3 viewportPosition = _camera.WorldToViewportPoint(transform.position);
 
-        transform.position = _camera.ViewportToWorldPoint(viewportPosition + moveAdjustment);
+            Vector3 moveAdjustment = Vector3.zero;
+
+            switch (viewportPosition.x)
+            {
+                case < 0:
+                    moveAdjustment.x += 1;
+                    break;
+                case > 1:
+                    moveAdjustment.x -= 1;
+                    break;
+            }
+
+            switch (viewportPosition.y)
+            {
+                case < 0:
+                    moveAdjustment.y += 1;
+                    break;
+                case > 1:
+                    moveAdjustment.y -= 1;
+                    break;
+            }
+
+            transform.position = _camera.ViewportToWorldPoint(viewportPosition + moveAdjustment);
+        }
     }
 }

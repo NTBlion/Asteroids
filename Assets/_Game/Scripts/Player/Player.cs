@@ -2,44 +2,47 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace _Game.Scripts.Player
 {
-    [SerializeField] private float _immortalTime;
-    [SerializeField] private BoxCollider2D _collider;
-    [SerializeField] private Rigidbody2D _rigidbody;
+    public class Player : MonoBehaviour
+    {
+        [SerializeField] private float _immortalTime;
+        [SerializeField] private BoxCollider2D _collider;
+        [SerializeField] private Rigidbody2D _rigidbody;
     
-    private Health _health;
+        private Health _health;
 
-    public Action Destroyed;
+        public Action Destroyed;
 
-    public void Init(Health health)
-    {
-        _health = health;
-    }
+        public void Init(Health health)
+        {
+            _health = health;
+        }
     
-    private void OnEnable()
-    {
-        _health.HealthChanged += OnHealthChanged;
-    }
+        private void OnEnable()
+        {
+            _health.HealthChanged += OnHealthChanged;
+        }
 
-    private void OnDisable()
-    {
-        _health.HealthChanged -= OnHealthChanged;
-        Destroyed?.Invoke();
-    }
+        private void OnDisable()
+        {
+            _health.HealthChanged -= OnHealthChanged;
+            Destroyed?.Invoke();
+        }
     
-    private void OnHealthChanged()
-    {
-        transform.position = Vector3.zero;
-        _rigidbody.velocity = Vector3.zero;
-        _rigidbody.rotation = 0;
-        StartCoroutine(BecomeImmortal());
-    }
+        private void OnHealthChanged()
+        {
+            transform.position = Vector3.zero;
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.rotation = 0;
+            StartCoroutine(BecomeImmortal());
+        }
 
-    private IEnumerator BecomeImmortal()
-    {
-        _collider.enabled = false;
-        yield return new WaitForSeconds(_immortalTime);
-        _collider.enabled = true;
+        private IEnumerator BecomeImmortal()
+        {
+            _collider.enabled = false;
+            yield return new WaitForSeconds(_immortalTime);
+            _collider.enabled = true;
+        }
     }
 }

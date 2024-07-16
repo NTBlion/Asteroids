@@ -1,13 +1,17 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class LoseScreenUI : MonoBehaviour
+namespace _Game.Scripts.UI
 {
-    [SerializeField] private ScoreView _scoreView;
-    [SerializeField] private TMP_Text _text;
-
-    private void OnEnable()
+    public class LoseScreenUI : MonoBehaviour
     {
-        _text.text = "Score: " + _scoreView.Text.text;
+        [FormerlySerializedAs("_scoreView")] [SerializeField] private ScoreUI scoreUI;
+        [SerializeField] private TMP_Text _text;
+
+        private void OnEnable()
+        {
+            _text.text = "Score: " + scoreUI.Text.text;
+        }
     }
 }

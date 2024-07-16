@@ -1,15 +1,18 @@
 using System;
 using UnityEngine;
 
-public class Score : MonoBehaviour
+namespace _Game.Scripts.Score
 {
-    private int _startScore = 0;
-
-    public Action<int> ScoreAdded;
-    
-    public void AddScore()
+    public class Score : MonoBehaviour
     {
-        _startScore++;
-        ScoreAdded?.Invoke(_startScore);
+        private int _startScore = 0;
+
+        public Action<int> ScoreAdded;
+    
+        public void AddScore()
+        {
+            _startScore++;
+            ScoreAdded?.Invoke(_startScore);
+        }
     }
 }

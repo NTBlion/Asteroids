@@ -1,31 +1,35 @@
+using _Game.Scripts.Pool;
 using UnityEngine;
 
-public class BulletSpawner : MonoBehaviour
+namespace _Game.Scripts.Shooting
 {
-    [SerializeField] private Transform _shootPoint;
-    [SerializeField] private Bullet _bullet;
-    [SerializeField] private int _poolCapacity;
-    [SerializeField] private Transform _container;
-
-    private Pool<Bullet> _pool;
-
-    public int PoolCapacity => _poolCapacity;
-
-    public Transform Container => _container;
-
-    public Bullet Bullet => _bullet;
-
-    public void Init(Pool<Bullet> pool)
+    public class BulletSpawner : MonoBehaviour
     {
-        _pool = pool;
-    }
+        [SerializeField] private Transform _shootPoint;
+        [SerializeField] private Bullet _bullet;
+        [SerializeField] private int _poolCapacity;
+        [SerializeField] private Transform _container;
+
+        private Pool<Bullet> _pool;
+
+        public int PoolCapacity => _poolCapacity;
+
+        public Transform Container => _container;
+
+        public Bullet Bullet => _bullet;
+
+        public void Init(Pool<Bullet> pool)
+        {
+            _pool = pool;
+        }
     
-    public void Spawn()
-    {
-        var bullet = _pool.EnableObject();
-        bullet.Init(_pool);
-        bullet.transform.position = _shootPoint.position;
-        bullet.transform.rotation = _shootPoint.transform.rotation;
+        public void Spawn()
+        {
+            var bullet = _pool.EnableObject();
+            bullet.Init(_pool);
+            bullet.transform.position = _shootPoint.position;
+            bullet.transform.rotation = _shootPoint.transform.rotation;
+        }
     }
 }
 

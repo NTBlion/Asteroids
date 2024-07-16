@@ -1,29 +1,32 @@
 using System;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+namespace _Game.Scripts.Player
 {
-    private const int Damage = 1;
+    public class Health : MonoBehaviour
+    {
+        private const int Damage = 1;
     
-    [SerializeField] private int _maxHealth;
-    private int _currentHealth;
+        [SerializeField] private int _maxHealth;
+        private int _currentHealth;
 
-    public Action HealthChanged;
-    public Action Died;
+        public Action HealthChanged;
+        public Action Died;
 
-    public int MaxHealth => _maxHealth;
+        public int MaxHealth => _maxHealth;
 
-    private void Awake()
-    {
-        _currentHealth = MaxHealth;
-    }
+        private void Awake()
+        {
+            _currentHealth = MaxHealth;
+        }
 
-    public void TakeDamage()
-    {
-        _currentHealth -= Damage;
-        HealthChanged?.Invoke();
+        public void TakeDamage()
+        {
+            _currentHealth -= Damage;
+            HealthChanged?.Invoke();
         
-        if (_currentHealth <= 0)
-            Died?.Invoke();
+            if (_currentHealth <= 0)
+                Died?.Invoke();
+        }
     }
 }

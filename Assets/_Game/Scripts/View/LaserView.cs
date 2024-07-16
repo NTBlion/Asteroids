@@ -1,34 +1,38 @@
+using _Game.Scripts.Shooting;
 using UnityEngine;
 
-public class LaserView : MonoBehaviour
+namespace _Game.Scripts.View
 {
-    [SerializeField] private Laser _laser;
-    [SerializeField] private SpriteRenderer _renderer;
-
-    private void Awake()
+    public class LaserView : MonoBehaviour
     {
-        _renderer.enabled = false;
-    }
+        [SerializeField] private Laser _laser;
+        [SerializeField] private SpriteRenderer _renderer;
 
-    private void OnEnable()
-    {
-        _laser.Enabled += OnEnabled;
-        _laser.Disabled += OnDisabled;
-    }
+        private void Awake()
+        {
+            _renderer.enabled = false;
+        }
 
-    private void OnDisable()
-    {
-        _laser.Enabled -= OnEnabled;
-        _laser.Disabled -= OnDisabled;
-    }
+        private void OnEnable()
+        {
+            _laser.Enabled += OnEnabled;
+            _laser.Disabled += OnDisabled;
+        }
 
-    private void OnDisabled()
-    {
-        _renderer.enabled = false;
-    }
+        private void OnDisable()
+        {
+            _laser.Enabled -= OnEnabled;
+            _laser.Disabled -= OnDisabled;
+        }
 
-    private void OnEnabled()
-    {
-        _renderer.enabled = true;
+        private void OnDisabled()
+        {
+            _renderer.enabled = false;
+        }
+
+        private void OnEnabled()
+        {
+            _renderer.enabled = true;
+        }
     }
 }

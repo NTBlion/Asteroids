@@ -1,39 +1,42 @@
-using System;
+using _Game.Scripts.Player;
 using UnityEngine;
 
-public class UFO : MonoBehaviour
+namespace _Game.Scripts.UFO
 {
-    [SerializeField] private float _speed;
-
-    private Player _player;
-
-    public void Init(Player player)
+    public class UFO : MonoBehaviour
     {
-        _player = player;
-        _player.Destroyed += OnDestroyed;
-    }
+        [SerializeField] private float _speed;
+
+        private Player.Player _player;
+
+        public void Init(Player.Player player)
+        {
+            _player = player;
+            _player.Destroyed += OnDestroyed;
+        }
     
-    private void OnDisable()
-    {
-        _player.Destroyed -= OnDestroyed;
-    }
+        private void OnDisable()
+        {
+            _player.Destroyed -= OnDestroyed;
+        }
 
-    private void Update()
-    {
-        transform.Translate((_player.transform.position - transform.position).normalized * (_speed * Time.deltaTime));
-    }
+        private void Update()
+        {
+            transform.Translate((_player.transform.position - transform.position).normalized * (_speed * Time.deltaTime));
+        }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.collider.TryGetComponent(out Health health))
-            health.TakeDamage();
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.collider.TryGetComponent(out Health health))
+                health.TakeDamage();
         
-        Destroy(gameObject);
-    }
+            Destroy(gameObject);
+        }
 
-    private void OnDestroyed()
-    {
-        Destroy(gameObject);
-    }
+        private void OnDestroyed()
+        {
+            Destroy(gameObject);
+        }
     
+    }
 }
