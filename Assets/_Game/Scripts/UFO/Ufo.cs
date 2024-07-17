@@ -17,7 +17,7 @@ namespace _Game.Scripts.UFO
             _player.Destroyed += OnDestroyed;
             _pool = pool;
         }
-        
+
         private void Update()
         {
             FollowPlayer();

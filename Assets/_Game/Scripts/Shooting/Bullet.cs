@@ -18,8 +18,13 @@ namespace _Game.Scripts.Shooting
 
         private void Update()
         {
+            Shoot();
+        }
+
+        private void Shoot()
+        {
             _time += Time.deltaTime;
-            transform.Translate(Vector2.up * _speed * Time.deltaTime);
+            transform.Translate(Vector2.up * (_speed * Time.deltaTime));
 
             if (_time >= _bulletLifeTime)
             {
@@ -27,7 +32,7 @@ namespace _Game.Scripts.Shooting
                 _pool.Disable(this);
             }
         }
-
+        
         private void OnCollisionEnter2D(Collision2D other)
         {
             _time = 0;

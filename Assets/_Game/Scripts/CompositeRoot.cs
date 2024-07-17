@@ -1,3 +1,4 @@
+using System;
 using _Game.Scripts.Asteroids;
 using _Game.Scripts.Character;
 using _Game.Scripts.Pool;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace _Game.Scripts
 {
-    public class GameFlow : MonoBehaviour
+    public class CompositeRoot : MonoBehaviour
     {
         [SerializeField] private Health _health;
         [SerializeField] private LoseScreenUI _loseScreen;
@@ -20,27 +21,35 @@ namespace _Game.Scripts
         [SerializeField] private AsteroidSpawner _asteroidSpawner;
         [SerializeField] private BulletSpawner _bulletSpawner;
         [SerializeField] private UfoSpawner _ufoSpawner;
+        [SerializeField] private PlayerController _playerController;
+        [SerializeField] private PlayerInput _playerInput;
+        
 
         private Pool<Asteroid> _asteroidPool;
         private Pool<Bullet> _bulletPool;
         private Pool<Ufo> _ufoPool;
-
-        private bool _thrusting = true;
-        private bool _rotating = true;
-        private bool _shooting = true;
-
+        
         private void Awake()
         {
+            
             _asteroidPool = new Pool<Asteroid>(_asteroidSpawner.Asteroid, _asteroidSpawner.PoolCapacity,
                 _asteroidSpawner.Container);
             _bulletPool = new Pool<Bullet>(_bulletSpawner.Bullet, _bulletSpawner.PoolCapacity, _bulletSpawner.Container);
             _ufoPool = new Pool<Ufo>(_ufoSpawner.Ufo, _ufoSpawner.PoolCapacity, _ufoSpawner.Container);
         
+            _playerController.Init(_movement, _laser, _bulletSpawner, _playerInput);
             _asteroidSpawner.Init(_asteroidPool, _score);
             _bulletSpawner.Init(_bulletPool);
             _ufoSpawner.Init(_player, _ufoPool);
             _player.Init(_health);
-        
+        }
+
+        private void Start()
+        {
+            _playerController.EnableLaser();
+            _playerController.EnableMoving();
+            _playerController.EnableShooting();
+            
             StartCoroutine(_asteroidSpawner.StartSpawn());
             StartCoroutine(_ufoSpawner.StartSpawn());
         }
@@ -54,24 +63,6 @@ namespace _Game.Scripts
         {
             _health.Died -= OnDied;
         }
-    
-        private void Update()
-        {
-            if (Input.GetMouseButtonDown(0) && _shooting)
-                _bulletSpawner.Spawn();
-
-            if (_rotating)
-                _movement.Rotate();
-        
-            if(Input.GetMouseButtonDown(1) && _laser.IsActive == false)
-                StartCoroutine(_laser.ActivateLaser());
-        }
-
-        private void FixedUpdate()
-        {
-            if (Input.GetKey(KeyCode.W) && _thrusting)
-                _movement.Move();
-        }
 
         private void OnDied()
         {
@@ -80,9 +71,9 @@ namespace _Game.Scripts
             _asteroidPool.ResetPool();
             _bulletPool.ResetPool();
             _ufoPool.ResetPool();
-            _thrusting = false;
-            _rotating = false;
-            _shooting = false;
+            _playerController.DisableLaser();
+            _playerController.DisableMoving();
+            _playerController.DisableShooting();
             _loseScreen.gameObject.SetActive(true);
         }
     }
