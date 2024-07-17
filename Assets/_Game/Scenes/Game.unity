@@ -1862,6 +1862,8 @@ MonoBehaviour:
   _asteroidSpawner: {fileID: 501813383}
   _bulletSpawner: {fileID: 1761291336}
   _ufoSpawner: {fileID: 1876875947}
+  _playerController: {fileID: 1622725419}
+  _playerInput: {fileID: 1622725420}
 --- !u!4 &1268147967
 Transform:
   m_ObjectHideFlags: 0
@@ -1895,7 +1897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1334633563
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2187,6 +2189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae6e5f14ca10b847af91fd1393f57b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _restarSceneButton: {fileID: 1434717111}
 --- !u!114 &1434717111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2594,6 +2597,8 @@ GameObject:
   - component: {fileID: 1622725414}
   - component: {fileID: 1622725417}
   - component: {fileID: 1622725418}
+  - component: {fileID: 1622725420}
+  - component: {fileID: 1622725419}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -2745,6 +2750,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 5
+--- !u!114 &1622725419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622725408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23871b1609bd47b6956f63d04a20778d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1622725420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622725408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213623c3880041fba7c20426675615c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1625158198
 GameObject:
   m_ObjectHideFlags: 0

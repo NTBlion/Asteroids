@@ -9,6 +9,11 @@ namespace _Game.Scripts.UI
         [FormerlySerializedAs("_scoreView")] [SerializeField] private ScoreUI scoreUI;
         [SerializeField] private TMP_Text _text;
 
+        private void Awake()
+        {
+            gameObject.SetActive(false);
+        }
+
         private void OnEnable()
         {
             _text.text = "Score: " + scoreUI.Text.text;
