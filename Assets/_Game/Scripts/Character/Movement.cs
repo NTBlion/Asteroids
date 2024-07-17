@@ -7,7 +7,7 @@ namespace _Game.Scripts.Character
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private float _speed;
         [SerializeField] private float _rotationSpeed;
-    
+
         public void Rotate(Vector3 direction)
         {
             transform.Rotate(-direction * (Time.deltaTime * _rotationSpeed));

@@ -14,11 +14,11 @@ namespace _Game.Scripts.Shooting
         private int _shootCount;
         private float _currentTime;
         private bool _isActive;
-        
+
         public event Action Enabled;
         public event Action Disabled;
         public event Action<int> ShootCountChanged;
-        
+
         public bool IsActive => _isActive;
 
         public float TimeBeforeAddShootCount => _timeBeforeAddShootCount;

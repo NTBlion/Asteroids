@@ -30,7 +30,8 @@ namespace _Game.Scripts.UI
             float rotationZ = _player.transform.rotation.z;
             Vector3 position = _player.transform.position;
             float speed = _rigidbody.velocity.magnitude;
-            _coordinatesText.text = $"X: {position.x:F2} Y: {position.y:F2} Rotation: {rotationZ:F2}\u00b0 Speed: {speed:F2} units/sec";
+            _coordinatesText.text =
+                $"X: {position.x:F2} Y: {position.y:F2} Rotation: {rotationZ:F2}\u00b0 Speed: {speed:F2} units/sec";
         }
     }
 }

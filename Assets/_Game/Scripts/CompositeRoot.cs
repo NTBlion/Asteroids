@@ -1,4 +1,3 @@
-using System;
 using _Game.Scripts.Asteroids;
 using _Game.Scripts.Character;
 using _Game.Scripts.Pool;
@@ -23,20 +22,19 @@ namespace _Game.Scripts
         [SerializeField] private UfoSpawner _ufoSpawner;
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private PlayerInput _playerInput;
-        
 
         private Pool<Asteroid> _asteroidPool;
         private Pool<Bullet> _bulletPool;
         private Pool<Ufo> _ufoPool;
-        
+
         private void Awake()
         {
-            
             _asteroidPool = new Pool<Asteroid>(_asteroidSpawner.Asteroid, _asteroidSpawner.PoolCapacity,
                 _asteroidSpawner.Container);
-            _bulletPool = new Pool<Bullet>(_bulletSpawner.Bullet, _bulletSpawner.PoolCapacity, _bulletSpawner.Container);
+            _bulletPool = new Pool<Bullet>(_bulletSpawner.Bullet, _bulletSpawner.PoolCapacity,
+                _bulletSpawner.Container);
             _ufoPool = new Pool<Ufo>(_ufoSpawner.Ufo, _ufoSpawner.PoolCapacity, _ufoSpawner.Container);
-        
+
             _playerController.Init(_movement, _laser, _bulletSpawner, _playerInput);
             _asteroidSpawner.Init(_asteroidPool, _score);
             _bulletSpawner.Init(_bulletPool);
@@ -49,7 +47,7 @@ namespace _Game.Scripts
             _playerController.EnableLaser();
             _playerController.EnableMoving();
             _playerController.EnableShooting();
-            
+
             StartCoroutine(_asteroidSpawner.StartSpawn());
             StartCoroutine(_ufoSpawner.StartSpawn());
         }
@@ -58,7 +56,7 @@ namespace _Game.Scripts
         {
             _health.Died += OnDied;
         }
-    
+
         private void OnDisable()
         {
             _health.Died -= OnDied;

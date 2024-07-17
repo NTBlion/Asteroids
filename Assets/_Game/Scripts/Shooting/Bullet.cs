@@ -32,7 +32,7 @@ namespace _Game.Scripts.Shooting
                 _pool.Disable(this);
             }
         }
-        
+
         private void OnCollisionEnter2D(Collision2D other)
         {
             _time = 0;

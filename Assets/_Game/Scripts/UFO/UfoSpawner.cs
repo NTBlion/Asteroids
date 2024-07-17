@@ -14,7 +14,7 @@ namespace _Game.Scripts.UFO
         [SerializeField] private Transform _container;
         [SerializeField] private float _timeBeforeSpawn;
         [SerializeField] private Transform[] _spawnPoints;
-        
+
         private Pool<Ufo> _pool;
         private Player _player;
 

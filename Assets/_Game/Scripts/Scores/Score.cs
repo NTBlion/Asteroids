@@ -8,7 +8,7 @@ namespace _Game.Scripts.Scores
         private int _startScore = 0;
 
         public event Action<int> ScoreAdded;
-    
+
         public void AddScore()
         {
             _startScore++;

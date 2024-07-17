@@ -11,12 +11,12 @@ namespace _Game.Scripts.UI
         [SerializeField] private TMP_Text _timeBeforeLaserSpawn;
 
         private int _shootCount;
-    
+
         private void OnEnable()
         {
             _laser.ShootCountChanged += OnChanged;
         }
-    
+
         private void OnDisable()
         {
             _laser.ShootCountChanged -= OnChanged;

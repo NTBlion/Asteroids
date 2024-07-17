@@ -6,7 +6,7 @@ namespace _Game.Scripts.Character
     public class Health : MonoBehaviour
     {
         private const int Damage = 1;
-    
+
         [SerializeField] private int _maxHealth;
         private int _currentHealth;
 
@@ -24,7 +24,7 @@ namespace _Game.Scripts.Character
         {
             _currentHealth -= Damage;
             HealthChanged?.Invoke();
-        
+
             if (_currentHealth <= 0)
                 Died?.Invoke();
         }

@@ -9,7 +9,7 @@ namespace _Game.Scripts.Character
         [SerializeField] private float _immortalTime;
         [SerializeField] private BoxCollider2D _collider;
         [SerializeField] private Rigidbody2D _rigidbody;
-    
+
         private Health _health;
 
         public event Action Destroyed;
@@ -18,7 +18,7 @@ namespace _Game.Scripts.Character
         {
             _health = health;
         }
-    
+
         private void OnEnable()
         {
             _health.HealthChanged += OnHealthChanged;
@@ -29,7 +29,7 @@ namespace _Game.Scripts.Character
             _health.HealthChanged -= OnHealthChanged;
             Destroyed?.Invoke();
         }
-    
+
         private void OnHealthChanged()
         {
             transform.position = Vector3.zero;

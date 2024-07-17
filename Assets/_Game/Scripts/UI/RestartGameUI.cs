@@ -6,16 +6,16 @@ namespace _Game.Scripts.UI
 {
     public class RestartGame : MonoBehaviour
     {
-        [SerializeField] private Button _restarSceneButton;
+        [SerializeField] private Button _restartSceneButton;
 
         private void OnEnable()
         {
-            _restarSceneButton.onClick.AddListener(OnClicked);
+            _restartSceneButton.onClick.AddListener(OnClicked);
         }
 
         private void OnDisable()
         {
-            _restarSceneButton.onClick.RemoveListener(OnClicked);
+            _restartSceneButton.onClick.RemoveListener(OnClicked);
         }
 
         private void OnClicked()

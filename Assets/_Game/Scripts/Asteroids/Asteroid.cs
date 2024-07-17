@@ -29,12 +29,12 @@ namespace _Game.Scripts.Asteroids
             _rigidbody.AddForce(new Vector2(Random.Range(_minForce, _maxForce), Random.Range(_minForce, _maxForce)),
                 ForceMode2D.Impulse);
         }
-        
+
         private void OnCollisionEnter2D(Collision2D other)
         {
             if (other.collider.TryGetComponent(out Health health))
                 health.TakeDamage();
-            
+
             Splitted?.Invoke(this);
             Destroyed?.Invoke(this);
             _pool.Disable(this);

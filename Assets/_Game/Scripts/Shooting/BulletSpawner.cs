@@ -22,7 +22,7 @@ namespace _Game.Scripts.Shooting
         {
             _pool = pool;
         }
-    
+
         public void Spawn()
         {
             var bullet = _pool.EnableObject();
@@ -32,4 +32,3 @@ namespace _Game.Scripts.Shooting
         }
     }
 }
-
