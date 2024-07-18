@@ -2301,13 +2301,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loseScreen: {fileID: 1334633566}
-  _bulletSpawner: {fileID: 1761291336}
-  _score: {fileID: 203576249}
-  _playerController: {fileID: 1622725419}
-  _health: {fileID: 0}
-  _player: {fileID: 0}
-  _asteroidSpawner: {fileID: 501813383}
-  _ufoSpawner: {fileID: 1876875947}
 --- !u!4 &1268147967
 Transform:
   m_ObjectHideFlags: 0
@@ -3726,51 +3719,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2037094550}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2015620409
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2015620410}
-  - component: {fileID: 2015620411}
-  m_Layer: 0
-  m_Name: AsteroidSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2015620410
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015620409}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2037094550}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2015620411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015620409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8376439c4984f66ab013c2cd83794c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawner: {fileID: 501813383}
 --- !u!1 &2037094548
 GameObject:
   m_ObjectHideFlags: 0
@@ -3805,6 +3753,16 @@ MonoBehaviour:
   - {fileID: 864405438}
   - {fileID: 897352514}
   - {fileID: 1083433226}
+  - {fileID: 741840064}
+  - {fileID: 1936958362}
+  - {fileID: 574902334}
+  - {fileID: 809329616}
+  - {fileID: 1522841042}
+  - {fileID: 1096216146}
+  - {fileID: 2004636627}
+  - {fileID: 1070679084}
+  - {fileID: 715284671}
+  - {fileID: 298348440}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -3836,7 +3794,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 864405437}
-  - {fileID: 2015620410}
   - {fileID: 574902335}
   - {fileID: 1522841043}
   - {fileID: 1936958363}
