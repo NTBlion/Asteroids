@@ -1,6 +1,5 @@
 using _Game.Scripts.Pool;
 using UnityEngine;
-using Zenject;
 
 namespace _Game.Scripts.Shooting
 {
@@ -18,9 +17,8 @@ namespace _Game.Scripts.Shooting
         public Transform Container => _container;
 
         public Bullet Bullet => _bullet;
-        
-        [Inject]
-        private void Construct(Pool<Bullet> pool)
+
+        public void Init(Pool<Bullet> pool)
         {
             _pool = pool;
         }

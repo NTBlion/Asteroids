@@ -3,7 +3,6 @@ using _Game.Scripts.Character;
 using _Game.Scripts.Pool;
 using Unity.Mathematics;
 using UnityEngine;
-using Zenject;
 using Random = UnityEngine.Random;
 
 namespace _Game.Scripts.UFO
@@ -24,9 +23,8 @@ namespace _Game.Scripts.UFO
         public int PoolCapacity => _poolCapacity;
 
         public Transform Container => _container;
-        
-        [Inject]
-        private void Construct(Player player, Pool<Ufo> pool)
+
+        public void Init(Player player, Pool<Ufo> pool)
         {
             _player = player;
             _pool = pool;

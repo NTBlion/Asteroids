@@ -2,7 +2,6 @@ using System.Collections;
 using _Game.Scripts.Pool;
 using _Game.Scripts.Scores;
 using UnityEngine;
-using Zenject;
 using Random = UnityEngine.Random;
 
 namespace _Game.Scripts.Asteroids
@@ -25,9 +24,8 @@ namespace _Game.Scripts.Asteroids
         public int PoolCapacity => _poolCapacity;
 
         public Transform Container => _container;
-        
-        [Inject]
-        private void Construct(Pool<Asteroid> asteroidPool, Score score)
+
+        public void Init(Pool<Asteroid> asteroidPool, Score score)
         {
             _asteroidPool = asteroidPool;
             _score = score;

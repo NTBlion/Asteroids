@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace _Game.Scripts.Character
 {
-    [RequireComponent(typeof(Rigidbody2D))]
     public class Movement : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D _rigidbody;

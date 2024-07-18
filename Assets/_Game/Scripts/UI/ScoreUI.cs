@@ -1,20 +1,13 @@
 using _Game.Scripts.Scores;
 using TMPro;
 using UnityEngine;
-using Zenject;
 
 namespace _Game.Scripts.UI
 {
     public class ScoreUI : MonoBehaviour
     {
+        [SerializeField] private Score _score;
         [SerializeField] private TMP_Text _text;
-        private Score _score;
-
-        [Inject]
-        private void Construct(Score score)
-        {
-            _score = score;
-        }
 
         public TMP_Text Text => _text;
 
