@@ -1,5 +1,6 @@
 using _Game.Scripts.Shooting;
 using UnityEngine;
+using Zenject;
 
 namespace _Game.Scripts.Character
 {
@@ -14,7 +15,8 @@ namespace _Game.Scripts.Character
         private bool _canMove;
         private bool _canUseLaser;
 
-        public void Init(Movement movement, Laser laser, BulletSpawner bulletSpawner, PlayerInput input)
+        [Inject]
+        private void Construct(Movement movement, Laser laser, BulletSpawner bulletSpawner, PlayerInput input)
         {
             _movement = movement;
             _laser = laser;
