@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace _Game.Scripts.Character
 {
@@ -9,15 +10,16 @@ namespace _Game.Scripts.Character
         [SerializeField] private float _immortalTime;
         [SerializeField] private BoxCollider2D _collider;
         [SerializeField] private Rigidbody2D _rigidbody;
-
+        
         private Health _health;
 
         public event Action Destroyed;
 
-        public void Init(Health health)
-        {
-            _health = health;
-        }
+        [Inject] 
+        private void Construct(Health health)
+         {
+             _health = health;
+         }
 
         private void OnEnable()
         {

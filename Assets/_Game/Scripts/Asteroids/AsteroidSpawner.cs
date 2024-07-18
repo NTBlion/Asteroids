@@ -24,7 +24,7 @@ namespace _Game.Scripts.Asteroids
         public int PoolCapacity => _poolCapacity;
 
         public Transform Container => _container;
-
+        
         public void Init(Pool<Asteroid> asteroidPool, Score score)
         {
             _asteroidPool = asteroidPool;
