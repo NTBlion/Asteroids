@@ -10,7 +10,7 @@ using Zenject;
 
 namespace _Game.Scripts.Infrastructure
 {
-    public class CompositeRoot : MonoBehaviour
+    public class GameFlow : MonoBehaviour
     {
         [SerializeField] private LoseScreenUI _loseScreen;
 
