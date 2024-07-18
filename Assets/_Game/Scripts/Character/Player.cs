@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -23,17 +24,17 @@ namespace _Game.Scripts.Character
 
         private void OnEnable()
         {
-            _health.HealthChanged += OnHealthChanged;
+            _health.CurrentHealth.Subscribe(OnHealthChanged).AddTo(this);
         }
 
         private void OnDisable()
         {
-            _health.HealthChanged -= OnHealthChanged;
             Destroyed?.Invoke();
         }
 
-        private void OnHealthChanged()
+        private void OnHealthChanged(int value)
         {
+            value = 0;
             transform.position = Vector3.zero;
             _rigidbody.velocity = Vector3.zero;
             _rigidbody.rotation = 0;

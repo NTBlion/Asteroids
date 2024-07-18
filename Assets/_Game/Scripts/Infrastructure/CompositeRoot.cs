@@ -5,6 +5,7 @@ using _Game.Scripts.Scores;
 using _Game.Scripts.Shooting;
 using _Game.Scripts.UFO;
 using _Game.Scripts.UI;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -47,15 +48,15 @@ namespace _Game.Scripts.Infrastructure
 
         private void OnEnable()
         {
-            _health.Died += OnDied;
+            _health.IsDead.Subscribe(x =>
+            {
+                if (x == true)
+                    OnDied(x);
+            }).AddTo(this);
         }
 
-        private void OnDisable()
-        {
-            _health.Died -= OnDied;
-        }
 
-        private void OnDied()
+        private void OnDied(bool Bool)
         {
             StopAllCoroutines();
             Destroy(_player.gameObject);

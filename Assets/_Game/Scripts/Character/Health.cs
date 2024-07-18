@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UniRx;
 
 namespace _Game.Scripts.Character
 {
@@ -8,25 +9,25 @@ namespace _Game.Scripts.Character
         private const int Damage = 1;
 
         [SerializeField] private int _maxHealth;
-        private int _currentHealth;
-
-        public event Action HealthChanged;
-        public event Action Died;
-
+        
+        private ReactiveProperty<int> _currentHealth = new ReactiveProperty<int>();
+        private ReactiveProperty<bool> _isDead = new ReactiveProperty<bool>(false);
+        
+        public ReactiveProperty<int> CurrentHealth => _currentHealth;
         public int MaxHealth => _maxHealth;
+        public ReactiveProperty<bool> IsDead => _isDead;
 
-        private void Awake()
+        private void OnValidate()
         {
-            _currentHealth = MaxHealth;
+            _currentHealth.Value = _maxHealth;
         }
 
         public void TakeDamage()
         {
-            _currentHealth -= Damage;
-            HealthChanged?.Invoke();
+            _currentHealth.Value -= Damage;
 
-            if (_currentHealth <= 0)
-                Died?.Invoke();
+            if (_currentHealth.Value <= 0)
+                _isDead.Value = true;
         }
     }
 }
