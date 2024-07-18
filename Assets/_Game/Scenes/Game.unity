@@ -3050,7 +3050,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 300217931202251460, guid: 86d8f09f2899b2d4799dd59abf8259ee, type: 3}
   _container: {fileID: 1622564441}
-  _lives: []
 --- !u!1 &1622725408
 GameObject:
   m_ObjectHideFlags: 0
@@ -3219,8 +3218,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 5
-  _currentHealth:
-    value: 5
 --- !u!114 &1622725419
 MonoBehaviour:
   m_ObjectHideFlags: 0
