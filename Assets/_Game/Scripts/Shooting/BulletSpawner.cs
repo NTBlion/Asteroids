@@ -19,7 +19,8 @@ namespace _Game.Scripts.Shooting
 
         public Bullet Bullet => _bullet;
         
-        public void Init(Pool<Bullet> pool)
+        [Inject]
+        private void Construct(Pool<Bullet> pool)
         {
             _pool = pool;
         }

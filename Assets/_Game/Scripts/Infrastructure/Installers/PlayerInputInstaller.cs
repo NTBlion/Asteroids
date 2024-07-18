@@ -2,7 +2,7 @@ using _Game.Scripts.Character;
 using UnityEngine;
 using Zenject;
 
-namespace _Game.Scripts.Infrastructure
+namespace _Game.Scripts.Infrastructure.Installers
 {
     public class PlayerInputInstaller : MonoInstaller
     {

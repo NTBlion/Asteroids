@@ -25,7 +25,8 @@ namespace _Game.Scripts.UFO
 
         public Transform Container => _container;
         
-        public void Init(Player player, Pool<Ufo> pool)
+        [Inject]
+        private void Construct(Player player, Pool<Ufo> pool)
         {
             _player = player;
             _pool = pool;
